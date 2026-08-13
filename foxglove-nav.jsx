@@ -12,7 +12,11 @@ const Nav = () => (
       <div className="marker" style={{ fontSize: 28, color: 'var(--ink)' }}>Arun Kumar</div>
     </div>
 
-    <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontFamily: "'Kalam', cursive", fontSize: 18 }}>
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 28,
+      fontFamily: "'Kalam', cursive", fontSize: 18,
+      flexWrap: 'wrap', justifyContent: 'center', rowGap: 10,
+    }}>
       {['about', 'experience', 'projects', 'skills', 'contact'].map((label, i) => (
         <a key={label} href={`#${label}`} style={{
           color: 'var(--ink)', textDecoration: 'none', position: 'relative',
