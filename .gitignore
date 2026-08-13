@@ -1,0 +1,33 @@
+# --- Local-only secrets ---
+# .env isn't actually read anywhere in this project (no build step to inject
+# it) — it's a leftover. Safe to ignore.
+.env
+.env.local
+.env.*.local
+
+# NOTE: config.js is intentionally NOT ignored.
+# It's loaded directly by index.html (<script src="config.js">) and holds
+# the Web3Forms access key the contact form needs at runtime. If you
+# gitignore it, your deployed site won't have it and the contact form will
+# stop working. Web3Forms keys are meant to live in client-side code (they
+# can only send mail to your configured inbox, not read anything), so
+# there's no real security downside to committing it — if you'd still
+# rather keep it out of public view, make the GitHub repo private instead.
+
+# --- Dependencies (only relevant if you ever run `npm install` for `serve`) ---
+/node_modules
+package-lock.json
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+
+# --- Vercel ---
+.vercel
+
+# --- Misc backups ---
+project.zip
+*.srcmap.json
+.thumbnail.jpg

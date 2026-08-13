@@ -1,0 +1,21 @@
+{
+  "name": "foxglove-landing",
+  "version": "1.0.0",
+  "description": "Foxglove landing page - a notebook app for daydreams and creative writing",
+  "main": "Foxglove Landing.html",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "dev": "npx serve . -p 3000"
+  },
+  "keywords": [
+    "notebook",
+    "writing",
+    "creative",
+    "landing-page"
+  ],
+  "author": "Foxglove Collective",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
