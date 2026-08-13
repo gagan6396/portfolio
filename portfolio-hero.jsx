@@ -465,7 +465,7 @@ const PortfolioHero = () => {
                   pointerEvents: 'none'
                 }}>
                   <img 
-                    src="profile.jpg" 
+                    src="/profile.jpg" 
                     alt="Arun Kumar" 
                     draggable={false}
                     style={{
