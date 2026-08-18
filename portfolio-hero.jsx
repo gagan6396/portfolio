@@ -225,13 +225,13 @@ const PortfolioHero = () => {
             animation: 'fadeInUp 0.8s ease-out 0.2s both'
           }}>
             <span style={{ position: 'relative', display: 'inline-block' }}>
-              Arun
+              Arun kumar
               <svg width="100%" height="12" viewBox="0 0 200 12" style={{ position: 'absolute', bottom: -8, left: 0 }}>
                 <path d="M0 6 Q50 2, 100 6 T200 6" fill="none" stroke="var(--rose-deep)" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </span>
             <br />
-            <span style={{ color: 'var(--rose-deep)' }}>Kumar</span>
+            {/* <span style={{ color: 'var(--rose-deep)' }}>Kumar</span> */}
           </h1>
 
           <div style={{
@@ -357,8 +357,8 @@ const PortfolioHero = () => {
         <div style={{ position: 'relative', height: device === 'mobile' ? 400 : 500, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {/* Decorative circles */}
           <div style={{ 
-            width: 300, 
-            height: 300, 
+            width: 350, 
+            height: 350, 
             borderRadius: '50%', 
             background: 'var(--rose-pale)', 
             opacity: 0.3, 
@@ -402,8 +402,8 @@ const PortfolioHero = () => {
             >
               {/* Spinning dashed accent ring */}
               <svg
-                width={device === 'mobile' ? 236 : 286}
-                height={device === 'mobile' ? 236 : 286}
+                width={device === 'mobile' ? 236 : 316}
+                height={device === 'mobile' ? 236 : 316}
                 viewBox="0 0 100 100"
                 style={{
                   position: 'absolute',
@@ -417,8 +417,8 @@ const PortfolioHero = () => {
                 <circle cx="50" cy="50" r="47" fill="none" stroke="var(--moss)" strokeWidth="1.4" strokeDasharray="4 6" opacity="0.55" />
               </svg>
               <svg
-                width={device === 'mobile' ? 216 : 266}
-                height={device === 'mobile' ? 216 : 266}
+                width={device === 'mobile' ? 216 : 290}
+                height={device === 'mobile' ? 216 : 290}
                 viewBox="0 0 100 100"
                 style={{
                   position: 'absolute',
@@ -436,8 +436,8 @@ const PortfolioHero = () => {
                 ref={photoCircleRef}
                 onClick={handlePhotoClick}
                 style={{
-                  width: device === 'mobile' ? 200 : 250,
-                  height: device === 'mobile' ? 200 : 250,
+                  width: device === 'mobile' ? 200 : 280,
+                  height: device === 'mobile' ? 200 : 280,
                   borderRadius: '50%',
                   background: 'var(--paper)',
                   padding: 8,
