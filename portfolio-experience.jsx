@@ -1,22 +1,12 @@
 const PortfolioExperience = () => {
   const experiences = [
-    {
-      company: 'Edigigo Pvt. Ltd.',
-      location: 'Gurugram',
-      role: 'Web Developer',
-      period: 'Sep 2025 - Present',
-      responsibilities: [
-        'Develop and maintain dynamic production websites using PHP, MySQL, JavaScript, HTML5, CSS3',
-        'Customize Shopify storefronts (theme editing, Liquid templating, custom section development)',
-        'Work with clients to scope requirements and deliver fixes/features',
-        'Focus on clean code and page-load performance optimization'
-      ]
-    },
+   
     {
       company: 'Dream Byte Solutions Pvt. Ltd.',
       location: 'Dehradun',
       role: 'Web Developer',
-      period: 'Apr 2024 - Aug 2025',
+      period: 'May 2025 - Aug 2026',
+      current: false,
       responsibilities: [
         'Built and maintained full-stack web applications using PHP, MySQL, JavaScript, HTML5, CSS3, AJAX',
         'Designed and developed a custom MERN stack billing and invoicing system with GST compliance',
@@ -28,67 +18,117 @@ const PortfolioExperience = () => {
 
   return (
     <section id="experience" style={{ padding: '60px 0' }}>
-      <SectionHeader 
-        eyebrow="where i've worked" 
+      <SectionHeader
+        eyebrow="where i've worked"
         title="experience"
         kicker="building production applications"
       />
-      
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-        {experiences.map((exp, index) => (
-          <PaperCard key={index} tilt={index % 2 === 0 ? -1.5 : 1.5} tape>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              marginBottom: 16,
-              flexWrap: 'wrap',
-              gap: 12
-            }}>
-              <div>
-                <h3 className="marker" style={{
-                  fontSize: 32,
-                  color: 'var(--ink)',
-                  marginBottom: 4
-                }}>
-                  {exp.role}
-                </h3>
-                <p className="hand" style={{
-                  fontSize: 22,
-                  color: 'var(--rose-deep)',
-                  fontWeight: 600
-                }}>
-                  {exp.company} • {exp.location}
-                </p>
-              </div>
-              <span style={{
-                padding: '8px 16px',
-                background: 'var(--rose-pale)',
-                color: 'var(--ink)',
-                borderRadius: 20,
-                fontSize: 18,
-                fontWeight: 600,
-                fontFamily: "'Kalam', cursive",
-                border: '1.5px solid var(--ink)',
-                transform: 'rotate(-2deg)'
+
+      <div style={{ position: 'relative', paddingLeft: 40 }}>
+        {/* Vertical timeline spine — hand-drawn feel via a slightly wobbly
+            dashed line rather than a straight solid rule */}
+        <div style={{
+          position: 'absolute',
+          left: 11,
+          top: 8,
+          bottom: 8,
+          width: 2,
+          background: 'repeating-linear-gradient(to bottom, var(--rose-deep) 0 6px, transparent 6px 12px)',
+        }} />
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+          {experiences.map((exp, index) => (
+            <div key={index} style={{ position: 'relative' }}>
+              {/* Timeline node */}
+              <div style={{
+                position: 'absolute',
+                left: -40,
+                top: 6,
+                width: 24,
+                height: 24,
+                borderRadius: '50%',
+                background: exp.current ? 'var(--rose-deep)' : 'var(--rose-pale)',
+                border: '2.5px solid var(--ink)',
+                boxShadow: exp.current ? '0 0 0 4px var(--rose-pale)' : 'none',
+              }} />
+
+              <div style={{
+                background: 'var(--paper, #fffdf8)',
+                border: '2px dashed var(--ink)',
+                borderRadius: 14,
+                padding: '24px 28px',
+                transform: `rotate(${index % 2 === 0 ? -0.6 : 0.6}deg)`,
               }}>
-                {exp.period}
-              </span>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  flexWrap: 'wrap',
+                  gap: 12,
+                  marginBottom: 14,
+                }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                      <h3 className="marker" style={{ fontSize: 30, color: 'var(--ink)', margin: 0 }}>
+                        {exp.role}
+                      </h3>
+                      {exp.current && (
+                        <span style={{
+                          fontFamily: "'Kalam', cursive",
+                          fontSize: 13,
+                          fontWeight: 700,
+                          color: 'var(--rose-deep)',
+                          background: 'var(--rose-pale)',
+                          border: '1.5px solid var(--rose-deep)',
+                          borderRadius: 999,
+                          padding: '2px 10px',
+                          transform: 'rotate(-2deg)',
+                        }}>
+                          current
+                        </span>
+                      )}
+                    </div>
+                    <p className="hand" style={{
+                      fontSize: 20,
+                      color: 'var(--ink-soft)',
+                      fontWeight: 600,
+                      margin: '4px 0 0',
+                    }}>
+                      {exp.company} <span style={{ opacity: 0.55 }}>•</span> {exp.location}
+                    </p>
+                  </div>
+
+                  <span style={{
+                    fontFamily: "'Kalam', cursive",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: 'var(--ink)',
+                    borderBottom: '2px solid var(--rose-deep)',
+                    paddingBottom: 2,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {exp.period}
+                  </span>
+                </div>
+
+                <ul style={{
+                  margin: 0,
+                  paddingLeft: 20,
+                  color: 'var(--ink-soft)',
+                  lineHeight: 1.75,
+                  fontFamily: "'Kalam', cursive",
+                  fontSize: 18,
+                  display: 'grid',
+                  gap: 4,
+                }}>
+                  {exp.responsibilities.map((resp, i) => (
+                    <li key={i}>{resp}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <ul style={{
-              margin: 0,
-              paddingLeft: 24,
-              color: 'var(--ink-soft)',
-              lineHeight: 1.8,
-              fontFamily: "'Kalam', cursive",
-              fontSize: 20
-            }}>
-              {exp.responsibilities.map((resp, i) => (
-                <li key={i}>{resp}</li>
-              ))}
-            </ul>
-          </PaperCard>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

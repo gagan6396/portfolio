@@ -7,9 +7,9 @@ const Nav = () => (
       {/* portfolio mark */}
       <svg width="38" height="38" viewBox="0 0 40 40">
         <circle cx="20" cy="20" r="14" fill="var(--rose)" stroke="var(--ink)" strokeWidth="1.8" />
-        <text x="20" y="26" textAnchor="middle" fontSize="16" fontWeight="bold" fill="var(--ink)">AK</text>
+        <text x="20" y="26" textAnchor="middle" fontSize="16" fontWeight="bold" fill="var(--ink)">GD</text>
       </svg>
-      <div className="marker" style={{ fontSize: 28, color: 'var(--ink)' }}>Arun Kumar</div>
+      <div className="marker" style={{ fontSize: 28, color: 'var(--ink)' }}>Gagan Dhyani</div>
     </div>
 
     <div style={{
@@ -28,7 +28,7 @@ const Nav = () => (
       ))}
       <ScribbleButton fill="var(--moss)" style={{ fontSize: 16, padding: '6px 16px' }}>
         <a 
-          href="arun_kumar_resume.pdf" 
+          href="GGN_Resume_updated.pdf" 
           download
           style={{
             display: 'inline-flex',
