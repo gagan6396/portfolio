@@ -17,17 +17,29 @@ const AmbientBackground = () => {
   const [scrollProgress, setScrollProgress] = React.useState(0);
 
   React.useEffect(() => {
+    let ticking = false;
     const updateProgress = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setScrollProgress(Math.min(100, Math.max(0, pct)));
+      ticking = false;
+    };
+    // Mobile fires many scroll events per swipe; without this, every one
+    // of them would trigger a React state update + re-render, competing
+    // for the same frame budget as the blur/animation work below. Collapsing
+    // them to at most one update per animation frame fixes that.
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateProgress);
+      }
     };
     updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', updateProgress);
     return () => {
-      window.removeEventListener('scroll', updateProgress);
+      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', updateProgress);
     };
   }, []);
@@ -80,7 +92,7 @@ const AmbientBackground = () => {
 
       {/* Layer 1: circuit-board style traces (thin grid lines standing in
           for PCB traces), drifting slowly */}
-      <div style={{
+      <div className="bg-pattern" style={{
         position: 'absolute',
         inset: '-60px',
         backgroundImage: `
@@ -92,7 +104,7 @@ const AmbientBackground = () => {
       }} />
       {/* Layer 2: solder-pad style dots at a coarser spacing (parallax
           depth), drifting the other way */}
-      <div style={{
+      <div className="bg-pattern" style={{
         position: 'absolute',
         inset: '-60px',
         backgroundImage: 'radial-gradient(var(--moss) 2px, transparent 2px)',
@@ -102,27 +114,27 @@ const AmbientBackground = () => {
       }} />
 
       {/* Layer 3: large soft color blobs, blurred, slowly floating */}
-      <div style={{
+      <div className="bg-blob" style={{
         position: 'absolute', top: '4vh', left: '-8vw', width: 380, height: 380, borderRadius: '50%',
         background: 'var(--sky)', opacity: 0.20, filter: 'blur(60px)',
         animation: 'bgBlobFloat1 16s ease-in-out infinite',
       }} />
-      <div style={{
+      <div className="bg-blob" style={{
         position: 'absolute', top: '38vh', right: '-10vw', width: 420, height: 420, borderRadius: '50%',
         background: 'var(--moss)', opacity: 0.18, filter: 'blur(70px)',
         animation: 'bgBlobFloat2 20s ease-in-out infinite',
       }} />
-      <div style={{
+      <div className="bg-blob" style={{
         position: 'absolute', top: '75vh', left: '-6vw', width: 340, height: 340, borderRadius: '50%',
         background: 'var(--mustard)', opacity: 0.18, filter: 'blur(60px)',
         animation: 'bgBlobFloat1 18s ease-in-out infinite reverse',
       }} />
-      <div style={{
+      <div className="bg-blob" style={{
         position: 'absolute', top: '112vh', right: '-8vw', width: 360, height: 360, borderRadius: '50%',
         background: 'var(--rose-pale)', opacity: 0.20, filter: 'blur(65px)',
         animation: 'bgBlobFloat2 22s ease-in-out infinite reverse',
       }} />
-      <div style={{
+      <div className="bg-blob" style={{
         position: 'absolute', top: '150vh', left: '-8vw', width: 380, height: 380, borderRadius: '50%',
         background: 'var(--sky)', opacity: 0.18, filter: 'blur(60px)',
         animation: 'bgBlobFloat1 19s ease-in-out infinite',
@@ -130,7 +142,7 @@ const AmbientBackground = () => {
 
       {/* Layer 4: scattered doodles, faint and slowly drifting/rotating */}
       {doodleSpots.map((d, i) => (
-        <div key={i} style={{
+        <div key={i} className="bg-doodle" style={{
           position: 'absolute',
           top: d.top,
           left: d.left,
@@ -165,6 +177,18 @@ const AmbientBackground = () => {
         }
         @media (prefers-reduced-motion: reduce) {
           .ambient-bg-layer, .ambient-bg-layer * { animation: none !important; }
+        }
+        /* Blur filters and many concurrent infinite animations are
+           disproportionately expensive on phones — this is the single
+           biggest source of scroll jank/lag on mobile. Below 720px we
+           shrink the blur radius a lot and stop animating the blobs and
+           doodles (they stay in place, just don't drift), which cuts
+           the per-frame compositing cost substantially while keeping
+           the same overall look. */
+        @media (max-width: 720px) {
+          .ambient-bg-layer .bg-blob { filter: blur(24px) !important; animation: none !important; }
+          .ambient-bg-layer .bg-doodle { animation: none !important; }
+          .ambient-bg-layer .bg-pattern { animation: none !important; }
         }
       `}</style>
       </div>

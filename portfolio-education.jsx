@@ -10,7 +10,24 @@ const PortfolioEducation = () => {
   ];
 
   return (
-    <section id="education" style={{ padding: '60px 0' }}>
+    <section id="education" style={{ padding: '60px 0', overflow: 'hidden' }}>
+      {/* Scoped responsiveness fix: same issue as #experience — the shared
+          SectionHeader title renders at a large fixed font-size that has
+          no room to shrink on narrow phones. This section's title is even
+          longer ("education & certifications"), so it's just as exposed.
+          clamp() lets it scale down instead of getting clipped. */}
+      <style>{`
+        #education h1,
+        #education h2,
+        #education .display,
+        #education .display-alt {
+          font-size: clamp(24px, 8vw, 64px) !important;
+          overflow-wrap: break-word;
+          word-break: break-word;
+          max-width: 100%;
+        }
+      `}</style>
+
       <SectionHeader
         eyebrow="learning journey"
         title="education & certifications"
@@ -23,7 +40,7 @@ const PortfolioEducation = () => {
         gap: 40
       }}>
         {/* Education: ticket-stub rows */}
-        <div>
+        <div style={{ minWidth: 0 }}>
           <h3 className="marker" style={{ fontSize: 32, marginBottom: 24, color: 'var(--ink)' }}>
             Education
           </h3>
@@ -36,6 +53,7 @@ const PortfolioEducation = () => {
                 border: '2px solid var(--ink)',
                 borderRadius: 8,
                 overflow: 'hidden',
+                minWidth: 0,
               }}>
                 {/* Perforated stub divider */}
                 <div style={{
@@ -52,14 +70,14 @@ const PortfolioEducation = () => {
                     {edu.period.split(' - ')[0].replace(/[A-Za-z]/g, '').trim() || edu.period}
                   </span>
                   {/* hole cutouts to sell the "ticket stub" look */}
-                  <div style={{ position: 'absolute', top: -8, right: -8, width: 16, height: 16, borderRadius: '50%', background: 'var(--bg-page, #f4f0ea)', border: '2px solid var(--ink)' }} />
-                  <div style={{ position: 'absolute', bottom: -8, right: -8, width: 16, height: 16, borderRadius: '50%', background: 'var(--bg-page, #f4f0ea)', border: '2px solid var(--ink)' }} />
+                  <div style={{ position: 'absolute', top: -8, right: -8, width: 16, height: 16, borderRadius: '50%', background: 'var(--paper, #f4f0ea)', border: '2px solid var(--ink)' }} />
+                  <div style={{ position: 'absolute', bottom: -8, right: -8, width: 16, height: 16, borderRadius: '50%', background: 'var(--paper, #f4f0ea)', border: '2px solid var(--ink)' }} />
                 </div>
-                <div style={{ padding: '16px 20px', flex: 1 }}>
-                  <h4 className="hand" style={{ fontSize: 22, fontWeight: 600, margin: '0 0 4px', color: 'var(--ink)' }}>
+                <div style={{ padding: '16px 20px', flex: 1, minWidth: 0 }}>
+                  <h4 className="hand" style={{ fontSize: 22, fontWeight: 600, margin: '0 0 4px', color: 'var(--ink)', overflowWrap: 'break-word' }}>
                     {edu.degree}
                   </h4>
-                  <p className="hand" style={{ color: 'var(--ink-soft)', margin: '0 0 4px', fontSize: 18 }}>
+                  <p className="hand" style={{ color: 'var(--ink-soft)', margin: '0 0 4px', fontSize: 18, overflowWrap: 'break-word' }}>
                     {edu.institution}
                   </p>
                   <p className="hand" style={{ color: 'var(--rose-deep)', fontSize: 16, fontWeight: 500, margin: 0 }}>
@@ -72,13 +90,13 @@ const PortfolioEducation = () => {
         </div>
 
         {/* Certifications: medal badges */}
-        <div>
+        <div style={{ minWidth: 0 }}>
           <h3 className="marker" style={{ fontSize: 32, marginBottom: 24, color: 'var(--ink)' }}>
             Certifications
           </h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
             {certifications.map((cert, index) => (
-              <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 150, textAlign: 'center' }}>
+              <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 150, maxWidth: '100%', textAlign: 'center' }}>
                 {/* Medal seal */}
                 <div style={{ position: 'relative', marginBottom: 10 }}>
                   <svg width="72" height="88" viewBox="0 0 72 88">
@@ -93,7 +111,7 @@ const PortfolioEducation = () => {
                     {cert.year}
                   </span>
                 </div>
-                <h4 className="hand" style={{ fontSize: 18, fontWeight: 600, margin: '0 0 2px', color: 'var(--ink)' }}>
+                <h4 className="hand" style={{ fontSize: 18, fontWeight: 600, margin: '0 0 2px', color: 'var(--ink)', overflowWrap: 'break-word' }}>
                   {cert.title}
                 </h4>
                 {cert.issuer && (

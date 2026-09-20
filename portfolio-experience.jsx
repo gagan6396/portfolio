@@ -1,6 +1,6 @@
 const PortfolioExperience = () => {
   const experiences = [
-   
+
     {
       company: 'Dream Byte Solutions Pvt. Ltd.',
       location: 'Dehradun',
@@ -17,14 +17,33 @@ const PortfolioExperience = () => {
   ];
 
   return (
-    <section id="experience" style={{ padding: '60px 0' }}>
+    <section id="experience" style={{ padding: '60px 0', overflow: 'hidden' }}>
+      {/* Scoped responsiveness fix: SectionHeader's title renders at a
+          large fixed font-size (Titan One is a very wide/fat font), which
+          has no space to shrink or wrap for a single word like
+          "experience" on narrow phones — it just gets clipped by the
+          page's overflow-x:hidden. clamp() lets it scale down smoothly
+          instead of overflowing. This is scoped to #experience only, so
+          it doesn't touch any other section using the same header. */}
+      <style>{`
+        #experience h1,
+        #experience h2,
+        #experience .display,
+        #experience .display-alt {
+          font-size: clamp(28px, 9vw, 64px) !important;
+          overflow-wrap: break-word;
+          word-break: break-word;
+          max-width: 100%;
+        }
+      `}</style>
+
       <SectionHeader
         eyebrow="where i've worked"
         title="experience"
         kicker="building production applications"
       />
 
-      <div style={{ position: 'relative', paddingLeft: 40 }}>
+      <div style={{ position: 'relative', paddingLeft: 40, maxWidth: '100%' }}>
         {/* Vertical timeline spine — hand-drawn feel via a slightly wobbly
             dashed line rather than a straight solid rule */}
         <div style={{
@@ -38,7 +57,7 @@ const PortfolioExperience = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
           {experiences.map((exp, index) => (
-            <div key={index} style={{ position: 'relative' }}>
+            <div key={index} style={{ position: 'relative', minWidth: 0 }}>
               {/* Timeline node */}
               <div style={{
                 position: 'absolute',
@@ -58,6 +77,7 @@ const PortfolioExperience = () => {
                 borderRadius: 14,
                 padding: '24px 28px',
                 transform: `rotate(${index % 2 === 0 ? -0.6 : 0.6}deg)`,
+                minWidth: 0,
               }}>
                 <div style={{
                   display: 'flex',
@@ -67,9 +87,9 @@ const PortfolioExperience = () => {
                   gap: 12,
                   marginBottom: 14,
                 }}>
-                  <div>
+                  <div style={{ minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                      <h3 className="marker" style={{ fontSize: 30, color: 'var(--ink)', margin: 0 }}>
+                      <h3 className="marker" style={{ fontSize: 30, color: 'var(--ink)', margin: 0, overflowWrap: 'break-word' }}>
                         {exp.role}
                       </h3>
                       {exp.current && (
@@ -93,6 +113,7 @@ const PortfolioExperience = () => {
                       color: 'var(--ink-soft)',
                       fontWeight: 600,
                       margin: '4px 0 0',
+                      overflowWrap: 'break-word',
                     }}>
                       {exp.company} <span style={{ opacity: 0.55 }}>•</span> {exp.location}
                     </p>
@@ -120,6 +141,7 @@ const PortfolioExperience = () => {
                   fontSize: 18,
                   display: 'grid',
                   gap: 4,
+                  overflowWrap: 'break-word',
                 }}>
                   {exp.responsibilities.map((resp, i) => (
                     <li key={i}>{resp}</li>
