@@ -1,5 +1,5 @@
 // Configuration file for sensitive data
 // This file should not be committed to version control
 const CONFIG = {
-  WEB3FORMS_ACCESS_KEY: '4ce13940-a494-4d69-bc14-073af4357665'
+  WEB3FORMS_ACCESS_KEY: '8aaf3a37-0f24-4656-b1a4-fd7f4af6a7bd'
 };

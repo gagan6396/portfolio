@@ -6,7 +6,7 @@
 <title>Gagan Dhyani - Full Stack Web Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Permanent+Marker&family=Reenie+Beanie&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Righteous&family=Gochi+Hand&family=Caveat:wght@400;500;600;700&family=Fredoka:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --cream: #f4ebd9;
@@ -38,10 +38,40 @@
   }
   ::selection{background: var(--rose-pale); color: var(--ink)}
 
-  .display{font-family:'Caveat', cursive; font-weight:700; letter-spacing:-0.5px; line-height:0.95}
-  .marker{font-family:'Permanent Marker', cursive; letter-spacing:0.5px}
-  .hand{font-family:'Kalam', cursive}
-  .beanie{font-family:'Reenie Beanie', cursive; line-height:1}
+  /* ---- Display: fat, rounded, playful ---- */
+  .display{
+    font-family: 'Titan One', cursive;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    line-height: 0.98;
+    text-transform: none;
+  }
+  /* Alt display: cleaner geometric retro */
+  .display-alt{
+    font-family: 'Righteous', cursive;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    line-height: 1.05;
+  }
+  /* Marker: bouncy handwriting for labels & badges */
+  .marker{
+    font-family: 'Gochi Hand', cursive;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  /* Hand: casual body-ish text */
+  .hand{
+    font-family: 'Caveat', cursive;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+  /* Beanie: soft rounded sans for eyebrow/kicker text */
+  .beanie{
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+  }
 
   #root{max-width:1240px; margin:0 auto; padding: 28px 32px 120px}
   @media (max-width: 720px){ #root{padding: 20px 18px 80px} }

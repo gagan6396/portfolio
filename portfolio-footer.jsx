@@ -151,7 +151,7 @@ const PortfolioFooter = () => (
           </p>
           <div className="hand" style={{ fontSize: 16, color: 'var(--ink-soft)', marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
             <CoffeeIcon size={16} />
-            <span>Fueled by fresh chai</span>
+            <span>Fueled by kadak chai</span>
           </div>
         </div>
       </div>
